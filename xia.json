@@ -1,0 +1,42 @@
+{
+  "id":"xia",
+  "description": "Xiaomi",
+  "gendevices":1,
+  "module":"xia.js",
+
+  "params": [
+      {
+      "name": "host",
+      "note": "Gateway IP",
+      "type": "string",
+      "val":  "192.168.0.111"
+     },
+			{
+				"name": "port",
+				"note": "Listen Port",
+				"type": "number",
+				"val":  "9898"
+      },
+      {
+				"name": "password",
+				"note": "Password",
+				"type": "string",
+				"val":  ""
+			}
+  ],
+
+"genrules":
+{
+    "motion":{"type":"110"},
+    "smoke":{"type":"140"},
+    "temperature":{"type":"220"},
+    "humidity":{"type":"230"},
+    "pressure":{"type":"2-0"},
+    "plug":{"type":"550"},
+    "magnet":{"type":"111"}
+},
+
+  "actions": [
+    {}
+  ]
+}
