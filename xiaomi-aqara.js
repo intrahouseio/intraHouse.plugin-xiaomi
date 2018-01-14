@@ -33,14 +33,11 @@ function sendCommand(id, value) {
       key: getKey(),
     },
   };
-
-  const old = '{"id":7,"method":"toggle_ctrl_neutral","params":["neutral_0","on"],"sid":"158d00019c9f2b"}';
-  send(old);
   send(JSON.stringify(payload));
 }
 
 function command(value) {
-  const id = '158d0001f99dfb'; // 158d00019c9f2b   158d0001f99dfb
+  const id = '158d00019c9f2b'; // 158d00019c9f2b   158d0001f99dfb
 
   switch (value) {
     case 'exit':
@@ -124,7 +121,7 @@ function parseMessage(msg) {
 }
 
 function getStatusDevices() {
-  send(`{"cmd":"read","sid":"158d00016c3dea"}`);
+  send(`{"cmd":"read","sid":"158d0001b1cbf5"}`);
 }
 
 function checkStatusDevices() {
@@ -142,7 +139,7 @@ function send(msg) {
 }
 
 function print(type, msg) {
-  console.log(new Date().toLocaleString(), type.padEnd(8, ' '), '-->  ', msg.sid.padEnd(14, ' '), msg.model, '', msg.data);
+  console.log(new Date().toLocaleString(), type.padEnd(8, ' '), '-->  ', msg.sid.padEnd(14, ' '), '', msg.data);
 }
 
 function start() {
@@ -152,5 +149,5 @@ function start() {
    socket.addMembership('224.0.0.50');
    send('{"cmd" : "get_id_list"}');
    listenKeyboard();
-  //  checkStatusDevices();
+   // checkStatusDevices();
 }
