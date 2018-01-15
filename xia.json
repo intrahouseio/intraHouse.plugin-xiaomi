@@ -27,15 +27,15 @@
 
 "genrules":
 {
-    "status":{"type":"110"},
-    "alarm":{"type":"140"},
+    "motion":{"type":"110"},
+    "illumination":{"type":"200"},
     "temperature":{"type":"210"},
     "humidity":{"type":"230"},
-    "pressure":{"type":"2-0"},
-    "channel_0":{"type":"550"},
+    "pressure":{"type":"200"},
+    "switch":{"type":"550"},
     "plug":{"type":"550"},
     "magnet":{"type":"111"},
-    "lux":{"type":"200"}
+    "smoke":{"type":"140"}
 },
 
   "actions": [
