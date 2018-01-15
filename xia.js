@@ -1,6 +1,10 @@
 const Plugin = require('./lib/plugin.js');
 const Xiaomi = require('./lib/xiaomi');
+const { getDeviceValueFromModel } = require('./lib/utils');
+
 const plugin = new Plugin();
+
+let channelsList = [];
 
 plugin.on('params', params => {
   start(params);
@@ -16,30 +20,8 @@ function mapChanelType(sid, desc) {
 
 function mapChanelData(sid, data) {
   return Object.keys(data).map(desc => {
-    return { id: `${desc}_${sid}`, value: transformValue(data[desc]) };
+    return { id: `${desc}_${sid}`, value: getDeviceValueFromModel(data[desc]) };
   });
-}
-
-function transformValue(value) {
-  switch (value) {
-    case 'on':
-      return 1;
-      break;
-    case 'off':
-      return 0;
-      break;
-    case 'close':
-      return 0;
-      break;
-    case 'open':
-      return 1;
-      break;
-    case null:
-      return 0;
-      break;
-    default:
-      return value;
-  }
 }
 
 function start(options) {
@@ -48,14 +30,16 @@ function start(options) {
   xiaomi.on('device', device => {
     const channels = device.props.map(item => mapChanelType(device.sid, item));
     const data = mapChanelData(device.sid, device.data)
-    plugin.setChannels(channels);
+    channelsList = channelsList.concat(channels);
+    plugin.setChannels(channelsList);
     plugin.setChannelsData(data);
-    // process.send({ type: 'log', txt: JSON.stringify(data), level: 3 });
+    process.send({ type: 'log', txt: JSON.stringify(channelsList), level: 4 });
+    process.send({ type: 'log', txt: JSON.stringify(data), level: 3 });
   });
 
   xiaomi.on('data', device => {
     const data = mapChanelData(device.sid, device.data)
     plugin.setChannelsData(data);
-    // process.send({ type: 'log', txt: JSON.stringify(data), level: 2 });
+    process.send({ type: 'log', txt: JSON.stringify(data), level: 2 });
   });
 }
