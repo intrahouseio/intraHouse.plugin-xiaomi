@@ -28,10 +28,11 @@
 "genrules":
 {
     "motion":{"type":"110"},
-    "smoke":{"type":"140"},
-    "temperature":{"type":"220"},
+    "alarm":{"type":"140"},
+    "temperature":{"type":"210"},
     "humidity":{"type":"230"},
     "pressure":{"type":"2-0"},
+    "channel_0":{"type":"550"},
     "plug":{"type":"550"},
     "magnet":{"type":"111"}
 },

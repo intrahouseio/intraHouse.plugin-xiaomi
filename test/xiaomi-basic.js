@@ -1,5 +1,5 @@
 const readline = require('readline');
-const miio = require('../miio/lib');
+const miio = require('../../miio/lib');
 const crypto = require('crypto');
 
 const rl = readline.createInterface({
@@ -27,13 +27,13 @@ function command(value) {
   }
 
   if (value == '0') {
-     // sendCommand('158d00019c9f2b', false);
+     sendCommand('158d00019c9f2b', false);
      sendCommand('158d0001f99dfb', false);
      return 1;
   }
 
   if (value == '1') {
-    // sendCommand('158d00019c9f2b', true);
+    sendCommand('158d00019c9f2b', true);
     sendCommand('158d0001f99dfb', true);
     return 1;
   }
