@@ -38,14 +38,14 @@ function start(options) {
 
     const data = mapChanelData(device.sid, device.props, device.data)
     plugin.setChannelsData(data);
-    process.send({ type: 'log', txt: JSON.stringify(channelsList), level: 4 });
-    process.send({ type: 'log', txt: JSON.stringify(data), level: 3 });
+    // process.send({ type: 'log', txt: JSON.stringify(channelsList), level: 4 });
+    // process.send({ type: 'log', txt: JSON.stringify(data), level: 3 });
   });
 
   xiaomi.on('data', device => {
     const data = mapChanelData(device.sid, device.props, device.data)
     plugin.setChannelsData(data);
-    process.send({ type: 'log', txt: JSON.stringify(data), level: 2 });
+    // process.send({ type: 'log', txt: JSON.stringify(data), level: 2 });
   });
 
   plugin.on('actions', data => {
