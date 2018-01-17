@@ -20,9 +20,17 @@ function mapChanelType(sid, desc) {
 }
 
 function mapChanelData(sid, props, data) {
+  const ext =  Object.keys(data)
+    .filter(key => props[key] && props[key].type === 'ext')
+    .reduce((l, n) => Object.assign({}, l, { [props[n].alias]: getDeviceValue(data[n]) }), {})
+
   return Object.keys(data)
     .filter(key => props[key] && props[key].type !== 'ext')
-    .map(key => ({ id: `${props[key].alias}_${sid}`, value: getDeviceValue(data[key])  }));
+    .map(key => ({ id: `${props[key].alias}_${sid}`, value: getDeviceValue(data[key]), ext  }));
+}
+
+function actions() {
+
 }
 
 function start(options) {
@@ -38,14 +46,11 @@ function start(options) {
 
     const data = mapChanelData(device.sid, device.props, device.data)
     plugin.setChannelsData(data);
-    // process.send({ type: 'log', txt: JSON.stringify(channelsList), level: 4 });
-    // process.send({ type: 'log', txt: JSON.stringify(data), level: 3 });
   });
 
   xiaomi.on('data', device => {
     const data = mapChanelData(device.sid, device.props, device.data)
     plugin.setChannelsData(data);
-    // process.send({ type: 'log', txt: JSON.stringify(data), level: 2 });
   });
 
   plugin.on('actions', data => {

@@ -88,7 +88,7 @@ function setDevices(list) {
 
 function start(host) {
   miio
-    .device({ address: host, token: '93faa4a2f30f15a6a20ec211c92336bd' })
+    .device({ address: host, token: '77291db76f7209958760d52d160da0b1' })
     .then(gateway => {
       setGateway(gateway);
       setDevices(gateway.devices);
@@ -98,4 +98,4 @@ function start(host) {
 }
 
 start('192.168.0.127');
-console.log('App start...')
+// console.log('App start...')

@@ -9,45 +9,130 @@ const rl = readline.createInterface({
 });
 
 const HOST = '192.168.0.127';
+const PORT = 9898;
 
 socket.on('error', error);
 socket.on('message', message);
 socket.on('listening', listen);
-socket.bind(9898, start);
+socket.bind(PORT, start);
 
 
 let DEVICES_LIST = {};
 let TOKEN = '';
 
+const commandList = {
+  plug: {
+    id: '158d00019c9f2b',
+    model: 'ctrl_neutral1',
+    prop: 'channel_0',
+    value: { a: 'off', b: 'on' }
+  },
+  switch: {
+    id: '158d0001f99dfb',
+    model: 'ctrl_neutral1',
+    prop: 'channel_0',
+    value: { a: 'off', b: 'on' }
+  },
+  gw_rgb: {
+    id: '7811dcb23d9d',
+    model: 'gateway',
+    prop: 'rgb',
+    value: { a: 0, b: getColor(255, 0, 0, 100)}  // alfa procent
+  },
+  gw_mid: {
+    id: '7811dcb23d9d',
+    model: 'gateway',
+    prop: 'mid',
+    value: { a: 9, b: 9 }, // 0 - 8, 10 - 13, 20 - 29, custom 10001 | vol 3 > 1, 0 - standart, 10 - 100
+  },
+  gw_add: {
+    id: '7811dcb23d9d',
+    model: 'gateway',
+    prop: 'join_permission',
+    value: { a: 'no', b: 'yes' },
+  },
+  gw_del: {
+    id: '7811dcb23d9d',
+    model: 'gateway',
+    prop: 'remove_device',
+    value: { a: '158d00019c9f2b', b: '158d00019c9f2b' },
+  },
+  test: {
+    id: '158d0001f99dfb',
+    model: 'ctrl_neutral1',
+    prop: 'status',
+    value: { a: 'off', b: 'on' },
+  },
+};
+
+const keyboard_command = 'gw_rgb';
+
+
+function getColor(r, g, b, a) {
+
+  return new Buffer([a, r, g, b]).readUInt32BE();
+}
+
+function colorOn() {
+  sendCommand(null, 'b', 'gw_rgb');
+  setTimeout(colorOff, 600)
+}
+
+function colorOff() {
+  sendCommand(null, 'a', 'gw_rgb');
+  setTimeout(colorOn, 600)
+}
+
+function alarm() {
+   sendCommand(null, 'b', 'gw_mid');
+  colorOn();
+}
+
+function worker() {
+  // sendCommand(null, 'b', 'gw_rgb');
+  //  alarm();
+  // sendCommand(null, 'b', 'gw_add');
+  // sendCommand(null, 'b', 'gw_mid');
+  // sendCommand(null, 'b', 'gw_del');
+
+  // sendCommand(null, 'b', 'test');
+
+
+}
 
 //---------------------------------------------------
 
-function sendCommand(id, value) {
-  const payload = {
-    sid: id,
-    short_id: 4343,
-    cmd: 'write',
-    model: 'ctrl_neutral1',
-    data: {
-      channel_01: value,
-      key: getKey(),
-    },
+function sendCommand(id, value, v = keyboard_command) {
+  let cmd = commandList[v];
+
+  const data = {
+    [cmd.prop]: cmd.value[value],
+    key: getKey(),
   };
-  send(JSON.stringify(payload));
+
+  const payload = {
+    sid: cmd.id,
+    // short_id: 0,
+    cmd: 'write',
+    model: cmd.model,
+    data,
+  };
+  const string = JSON.stringify(payload);
+  // console.log('-->', '', string)
+  send(string);
 }
 
 function command(value) {
-  const id = '158d00019c9f2b'; // 158d00019c9f2b   158d0001f99dfb
-
+  const id = null;
   switch (value) {
     case 'exit':
       process.exit();
       break;
     case '0':
-      sendCommand(id, 'off');
+      sendCommand(id, 'a');
       break;
     case '1':
-      sendCommand(id, 'on');
+      sendCommand(id, 'b');
       break;
     default:
   }
@@ -70,6 +155,7 @@ function listen() {
 }
 
 function message(data) {
+  console.log(data.toString());
   const msg = JSON.parse(data.toString());
   const print = parseMessage(msg);
 
@@ -81,6 +167,7 @@ function parseDeviceList(msg) {
   TOKEN = msg.token;
   console.log('DEVICES_LIST:' , msg.data);
   console.log('----------------------------')
+  worker();
 }
 
 function parseHeartbeat(msg) {
@@ -101,6 +188,10 @@ function parseAck(msg) {
   print('status', msg);
 }
 
+function parseWriteAck(msg) {
+  print('command', msg);
+}
+
 function parseMessage(msg) {
   switch (msg.cmd) {
     case 'get_id_list_ack':
@@ -114,6 +205,8 @@ function parseMessage(msg) {
       return 0
     case 'read_ack':
       parseAck(msg);
+    case 'write_ack':
+      parseWriteAck(msg);
       return 0
     default:
       return msg;
@@ -129,13 +222,13 @@ function checkStatusDevices() {
 }
 
 function getKey() {
-  let cipher = crypto.createCipheriv('aes-128-cbc', new Buffer('guxlbxgbhyax6oyc'), new Buffer('F5ltCT0o3bO6aVoub1hWLg==', 'base64'));
+  let cipher = crypto.createCipheriv('aes-128-cbc', new Buffer('pnikapx23m8fryef'), new Buffer('F5ltCT0o3bO6aVoub1hWLg==', 'base64'));
   let encryptedData = cipher.update(TOKEN, 'utf8', 'hex') + cipher.final('hex');
   return encryptedData.toUpperCase().slice(0, 32);
 }
 
 function send(msg) {
-  socket.send(msg, 0, msg.length, 9898, HOST);
+  socket.send(msg, 0, msg.length, PORT, HOST);
 }
 
 function print(type, msg) {
