@@ -6,7 +6,7 @@ const unitid = 'plugin_emu'
 const params = {
   host: '192.168.0.127',
   port: 9898,
-  password: 'guxlbxgbhyax6oyc',
+  token: '44cbc0b8974e5fd75a758539b72aefa1',
 }
 
 const config = [];
@@ -22,13 +22,13 @@ ps.on('message', data => {
     ps.send({ type: 'get', config: {} });
   }
 
-  if (data.type === 'data1') {
+  if (data.type === 'data') {
     console.log('-------------data-------------', Date.now());
     console.log(data.data);
     console.log('');
   }
 
-  if (data.type === 'channels1') {
+  if (data.type === 'channels') {
     console.log('-----------channels-----------', Date.now());
     console.log(data.data);
     console.log('');
@@ -39,13 +39,6 @@ ps.on('close', code => {
   // console.log('close');
 });
 
-setTimeout(() => ps.send({
-  type: 'act',
-  data: [
-    {
-      id: 'plug_158d00019c9f2b',
-      value: 1,
-      desc: 'plug',
-    },
-  ],
-}), 3000);
+const temp = JSON.parse('[{"id":"plug_158d00019c9f2b","value":1,"desc":"plug","command":"on"}]');
+
+// setTimeout(() => ps.send({type: 'act', data: temp }), 1500);

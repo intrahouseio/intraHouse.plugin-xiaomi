@@ -52,9 +52,16 @@ function start(options) {
       const [alias, id] = item.id.split('_');
       const value = item.value;
       const command = item.command;
-      const action = getDeviceAction(id, alias, [value]);
 
-      xiaomi.sendAction(action);
+      switch (command) {
+        case 'on':
+          xiaomi.sendAction(getDeviceAction(id, alias, ['on']));
+          break;
+        case 'off':
+          xiaomi.sendAction(getDeviceAction(id, alias, ['off']));
+          break;
+        default:
+      }
     });
   });
 }

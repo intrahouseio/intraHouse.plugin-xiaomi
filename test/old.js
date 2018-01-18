@@ -9,7 +9,7 @@ const rl = readline.createInterface({
 });
 
 const HOST = '192.168.0.127';
-const PORT =  54321 || 9898;
+const PORT =  54321;
 
 
 socket.on('message', message);
@@ -86,6 +86,6 @@ function handshakeEnd() {
    send({ method: 'get_device_prop', params: ['lumi.0','device_list'] });
    send({ method: 'get_lumi_dpf_aes_key', params: [] });
 
-   // send({ method: 'toggle_plug', params: ['neutral_0', 'on'], sid: '158d00019c9f2b' }); 
+   // send({ method: 'toggle_plug', params: ['neutral_0', 'on'], sid: '158d00019c9f2b' });
    // send({ method: 'toggle_ctrl_neutral', params: ['neutral_0', 'off'], sid: '158d0001f99dfb' });
 }
