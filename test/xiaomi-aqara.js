@@ -91,7 +91,7 @@ function alarm() {
 function worker() {
   // sendCommand(null, 'b', 'gw_rgb');
   //  alarm();
-  // sendCommand(null, 'b', 'gw_add');
+   sendCommand(null, 'b', 'gw_add');
   // sendCommand(null, 'b', 'gw_mid');
   // sendCommand(null, 'b', 'gw_del');
 
@@ -155,7 +155,7 @@ function listen() {
 }
 
 function message(data) {
-  console.log(data.toString());
+//  console.log(data.toString());
   const msg = JSON.parse(data.toString());
   const print = parseMessage(msg);
 
