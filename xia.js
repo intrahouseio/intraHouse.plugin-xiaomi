@@ -5,6 +5,7 @@ const { getDeviceValue, getDeviceAction } = require('./lib/utils');
 const plugin = new Plugin();
 
 let channelsList = [];
+let cache = {};
 
 
 plugin.on('params', params => {
@@ -26,13 +27,29 @@ function getChanelList(device) {
 }
 
 function getChanelData(sid, props, data) {
-  const ext =  Object.keys(data)
+  const temp = checkChanelDataDiff(sid, data);
+  const ext =  Object.keys(temp)
     .filter(key => props[key] && props[key].type === 'ext')
-    .reduce((l, n) => Object.assign({}, l, { [props[n].alias]: getDeviceValue(data[n]) }), {})
+    .reduce((l, n) => Object.assign({}, l, { [props[n].alias]: getDeviceValue(temp[n]) }), {})
 
-  return Object.keys(data)
+  return Object.keys(temp)
     .filter(key => props[key] && props[key].type !== 'ext')
-    .map(key => ({ id: `${props[key].alias}_${sid}`, value: getDeviceValue(data[key]), ext  }));
+    .map(key => ({ id: `${props[key].alias}_${sid}`, value: getDeviceValue(temp[key]), ext  }));
+}
+
+function checkChanelDataDiff(sid, data) {
+  if (!cache[sid]) {
+    cache[sid] = {};
+  }
+
+  let temp = {};
+  Object.keys(data).forEach(key => {
+    if (cache[sid][key] !== data[key]) {
+      cache[sid][key] = data[key];
+      temp[key] = data[key];
+    }
+  });
+  return temp;
 }
 
 function start(options) {
@@ -44,7 +61,10 @@ function start(options) {
   });
 
   xiaomi.on('data', device => {
-    plugin.setChannelsData(getChanelData(device.sid, device.props, device.data));
+    const temp = getChanelData(device.sid, device.props, device.data);
+    if (temp.length > 0) {
+      plugin.setChannelsData(temp);
+    }
   });
 
   plugin.on('actions', data => {
