@@ -22,13 +22,13 @@ ps.on('message', data => {
     ps.send({ type: 'get', config: {} });
   }
 
-  if (data.type === 'data') {
+  if (data.type === 'data1') {
     console.log('-------------data-------------', Date.now());
     console.log(data.data);
     console.log('');
   }
 
-  if (data.type === 'channels') {
+  if (data.type === 'channels1') {
     console.log('-----------channels-----------', Date.now());
     console.log(data.data);
     console.log('');
