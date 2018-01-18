@@ -1,46 +1,77 @@
 {
-  "id":"xia",
-  "description": "Xiaomi",
-  "gendevices":1,
-  "module":"xia.js",
-
-  "params": [
-      {
-      "name": "host",
-      "note": "Gateway IP",
-      "type": "string",
-      "val":  "192.168.0.111"
-     },
-			{
-				"name": "port",
-				"note": "Listen Port",
-				"type": "number",
-				"val":  "9898"
-      },
-      {
-				"name": "password",
-				"note": "Password",
-				"type": "string",
-				"val":  ""
-			}
-  ],
-
-"genrules":
-{
-    "motion":{"type":"110"},
-    "illumination":{"type":"200"},
-    "temperature":{"type":"210"},
-    "humidity":{"type":"230"},
-    "pressure":{"type":"200"},
-    "switch":{"type":"550"},
-    "plug":{"type":"550"},
-    "magnet":{"type":"111"},
-    "smoke":{"type":"140"},
-    "gw_illumination":{"type":"200"},
-    "gw_rgb":{"type":"530"}
-},
-
-  "actions": [
-    {}
-  ]
+    "id": "xia",
+    "description": "Xiaomi",
+    "gendevices": 1,
+    "module": "xia.js",
+    "params": [
+        {
+            "name": "host",
+            "note": "Gateway IP",
+            "type": "string",
+            "val": "192.168.0.111"
+        },
+        {
+            "name": "port",
+            "note": "Listen Port",
+            "type": "number",
+            "val": "9898"
+        },
+        {
+            "name": "token",
+            "note": "Token",
+            "type": "string",
+            "val": ""
+        }
+    ],
+    "genrules": {
+        "motion": {
+            "type": "110",
+            "ext": []
+        },
+        "illumination": {
+            "type": "200"
+        },
+        "temperature": {
+            "type": "210"
+        },
+        "humidity": {
+            "type": "230"
+        },
+        "pressure": {
+            "type": "200"
+        },
+        "switch": {
+            "type": "550"
+        },
+        "plug": {
+            "type": "550",
+            "commands": [
+                "on",
+                "off"
+            ],
+            "ext": [
+                {
+                    "name": "voltage",
+                    "note": "Зарядка",
+                    "type": "number",
+                    "op": "r"
+                }
+            ]
+        },
+        "magnet": {
+            "type": "111"
+        },
+        "smoke": {
+            "type": "140"
+        },
+        "gw_illumination": {
+            "type": "200"
+        },
+        "gw_rgb": {
+            "type": "530"
+        }
+    },
+    "actions": [
+        {}
+    ]
 }
