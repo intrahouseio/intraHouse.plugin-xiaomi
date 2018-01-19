@@ -44,10 +44,7 @@ function start(options) {
   });
 
   xiaomi.on('data', device => {
-    const temp = getChanelData(device.sid, device.props, device.data);
-    if (temp.length > 0) {
-      plugin.setChannelsData(temp);
-    }
+    plugin.setChannelsData(getChanelData(device.sid, device.props, device.data));
   });
 
   plugin.on('actions', data => {
