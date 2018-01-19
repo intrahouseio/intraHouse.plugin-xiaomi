@@ -28,14 +28,14 @@
       "type": "110",
       "ext": [
         {
-          "name": "no_motion",
-          "note": "Нет движения",
+          "name": "voltage",
+          "note": "Зарядка",
           "type": "number",
           "op": "r"
         },
         {
-          "name": "voltage",
-          "note": "Зарядка",
+          "name": "no_motion",
+          "note": "Нет движения",
           "type": "number",
           "op": "r"
         }
@@ -89,6 +89,12 @@
       "type": "550",
       "ext": [
         {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        },
+        {
           "name": "load_power",
           "note": "Потребление",
           "type": "number",
@@ -99,12 +105,6 @@
           "note": "Общее потребление",
           "type": "number",
           "op": "r"
-        },
-        {
-          "name": "voltage",
-          "note": "Зарядка",
-          "type": "number",
-          "op": "r"
         }
       ]
     },
@@ -112,14 +112,14 @@
       "type": "111",
       "ext": [
         {
-          "name": "no_close",
-          "note": "Без закрытия",
+          "name": "voltage",
+          "note": "Зарядка",
           "type": "number",
           "op": "r"
         },
         {
-          "name": "voltage",
-          "note": "Зарядка",
+          "name": "no_close",
+          "note": "Без закрытия",
           "type": "number",
           "op": "r"
         }
@@ -129,14 +129,14 @@
       "type": "140",
       "ext": [
         {
-          "name": "density",
-          "note": "Плотность дыма",
+          "name": "voltage",
+          "note": "Зарядка",
           "type": "number",
           "op": "r"
         },
         {
-          "name": "voltage",
-          "note": "Зарядка",
+          "name": "density",
+          "note": "Плотность дыма",
           "type": "number",
           "op": "r"
         }
