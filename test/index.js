@@ -23,13 +23,13 @@ ps.on('message', data => {
   }
 
   if (data.type === 'data') {
-    console.log('-------------data-------------', Date.now());
+    console.log('-------------data-------------', new Date().toLocaleString());
     console.log(data.data);
     console.log('');
   }
 
   if (data.type === 'channels') {
-    console.log('-----------channels-----------', Date.now());
+    console.log('-----------channels-----------', new Date().toLocaleString());
     console.log(data.data);
     console.log('');
   }

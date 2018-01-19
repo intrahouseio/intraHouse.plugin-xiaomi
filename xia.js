@@ -35,21 +35,6 @@ function getChanelData(sid, props, data) {
     .map(key => ({ id: `${props[key].alias}_${sid}`, value: getDeviceValue(data[key]), ext  }));
 }
 
-/* function checkChanelDataDiff(sid, data) {
-  if (!cache[sid]) {
-    cache[sid] = {};
-  }
-
-  let temp = {};
-  Object.keys(data).forEach(key => {
-    if (cache[sid][key] !== data[key]) {
-      cache[sid][key] = data[key];
-      temp[key] = data[key];
-    }
-  });
-  return temp;
-} */
-
 function start(options) {
   const xiaomi = new Xiaomi(options);
 
