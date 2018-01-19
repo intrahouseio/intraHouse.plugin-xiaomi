@@ -96,7 +96,7 @@
         },
         {
           "name": "power_consumed",
-          "note": "Потребление общее",
+          "note": "Общее потребление",
           "type": "number",
           "op": "r"
         },
