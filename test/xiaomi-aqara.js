@@ -92,7 +92,7 @@ function alarm() {
 function worker() {
   // sendCommand(null, 'b', 'gw_rgb');
   //  alarm();
-  // sendCommand(null, 'b', 'gw_add');
+   sendCommand(null, 'b', 'gw_add');
   // sendCommand(null, 'b', 'gw_mid');
   // sendCommand(null, 'b', 'gw_del');
 

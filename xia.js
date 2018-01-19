@@ -30,9 +30,14 @@ function getChanelData(sid, props, data) {
     .filter(key => props[key] && props[key].type === 'ext')
     .reduce((l, n) => Object.assign({}, l, { [props[n].alias]: getDeviceValue(data[n]) }), {})
 
-  return Object.keys(data)
-    .filter(key => props[key] && props[key].type !== 'ext')
-    .map(key => ({ id: `${props[key].alias}_${sid}`, value: getDeviceValue(data[key]), ext  }));
+  return Object.keys(props)
+    .filter(key => props[key].type !== 'ext')
+    .map(key => {
+      if (data[key]) {
+        return { id: `${props[key].alias}_${sid}`, value: getDeviceValue(data[key]), ext  }
+      }
+      return { id: `${props[key].alias}_${sid}`, ext  }
+    });
 }
 
 function start(options) {
