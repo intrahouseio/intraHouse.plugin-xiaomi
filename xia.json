@@ -26,29 +26,23 @@
   "genrules": {
     "motion": {
       "type": "110",
-      "ext": []
+      "ext": [
+        {
+          "name": "no_motion",
+          "note": "Нет движения",
+          "type": "number",
+          "op": "r"
+        },
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
     },
     "illumination": {
-      "type": "200"
-    },
-    "temperature": {
-      "type": "210"
-    },
-    "humidity": {
-      "type": "230"
-    },
-    "pressure": {
-      "type": "200"
-    },
-    "switch": {
-      "type": "550"
-    },
-    "plug": {
-      "type": "550",
-      "commands": [
-        "on",
-        "off"
-      ],
+      "type": "200",
       "ext": [
         {
           "name": "voltage",
@@ -58,24 +52,124 @@
         }
       ]
     },
+    "temperature": {
+      "type": "210",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
+    },
+    "humidity": {
+      "type": "230",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
+    },
+    "pressure": {
+      "type": "200",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
+    },
+    "plug": {
+      "type": "550",
+      "ext": [
+        {
+          "name": "load_power",
+          "note": "Потребление",
+          "type": "number",
+          "op": "r"
+        },
+        {
+          "name": "power_consumed",
+          "note": "Потребление общее",
+          "type": "number",
+          "op": "r"
+        },
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
+    },
     "magnet": {
-      "type": "111"
+      "type": "111",
+      "ext": [
+        {
+          "name": "no_close",
+          "note": "Без закрытия",
+          "type": "number",
+          "op": "r"
+        },
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
     },
     "smoke": {
-      "type": "140"
+      "type": "140",
+      "ext": [
+        {
+          "name": "density",
+          "note": "Плотность дыма",
+          "type": "number",
+          "op": "r"
+        },
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
     },
     "gw_rgb": {
-      "type": "530"
+      "type": "530",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
     },
     "gw_illumination": {
-      "type": "200"
+      "type": "200",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
     },
     "gateway": {
       "type": "9100",
       "ext": [
         {
           "name": "life",
-          "note": "life",
+          "note": "uptime",
           "type": "number",
           "op": "r"
         },

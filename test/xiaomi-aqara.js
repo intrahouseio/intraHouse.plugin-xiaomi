@@ -2,6 +2,7 @@ const dgram = require('dgram');
 const socket = dgram.createSocket('udp4');
 const readline = require('readline');
 const crypto = require('crypto');
+const fs = require('fs');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -91,7 +92,7 @@ function alarm() {
 function worker() {
   // sendCommand(null, 'b', 'gw_rgb');
   //  alarm();
-   sendCommand(null, 'b', 'gw_add');
+  // sendCommand(null, 'b', 'gw_add');
   // sendCommand(null, 'b', 'gw_mid');
   // sendCommand(null, 'b', 'gw_del');
 
@@ -155,11 +156,16 @@ function listen() {
 }
 
 function message(data) {
-//  console.log(data.toString());
+  log(data);
   const msg = JSON.parse(data.toString());
   const print = parseMessage(msg);
 
   print && console.log('Unknown type msg', print)
+}
+
+function log(data) {
+  const string = `${new Date().toLocaleString()} --> ${data.toString()}\r\n`;
+  fs.appendFileSync('gateway.log', string);
 }
 
 function parseDeviceList(msg) {
