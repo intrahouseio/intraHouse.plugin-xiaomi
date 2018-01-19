@@ -64,11 +64,14 @@
     "smoke": {
       "type": "140"
     },
+    "gw_rgb": {
+      "type": "530"
+    },
     "gw_illumination": {
       "type": "200"
     },
-    "gw_rgb": {
-      "type": "530",
+    "gateway": {
+      "type": "9100",
       "ext": [
         {
           "name": "life",
