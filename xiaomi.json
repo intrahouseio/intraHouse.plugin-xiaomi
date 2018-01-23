@@ -1,8 +1,8 @@
 {
-  "id": "xia",
+  "id": "xiaomi",
   "description": "Xiaomi",
   "gendevices": 1,
-  "module": "xia.js",
+  "module": "index.js",
   "params": [
     {
       "name": "host",
