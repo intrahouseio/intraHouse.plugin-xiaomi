@@ -5,6 +5,7 @@ const { getDeviceValue, getDeviceAction } = require('./lib/utils');
 const plugin = new Plugin();
 
 let channelsList = [];
+let debug = false;
 
 
 plugin.on('params', params => {
@@ -13,6 +14,10 @@ plugin.on('params', params => {
 
 plugin.on('channels', channels => {
   // console.log(channels);
+});
+
+plugin.on('debug', mode => {
+  debug = mode;
 });
 
 function getChanel(sid, desc) {
@@ -42,6 +47,19 @@ function getChanelData(sid, props, data) {
 
 function start(options) {
   const xiaomi = new Xiaomi(options);
+
+  xiaomi.on('message', data => {
+    if (debug) {
+      plugin.debug(data);
+    }
+  });
+
+  xiaomi.on('send', data => {
+    if (debug) {
+      plugin.debug(data);
+    }
+  });
+
 
   xiaomi.on('device', device => {
     plugin.setChannels(getChanelList(device));

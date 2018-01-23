@@ -33,6 +33,12 @@ ps.on('message', data => {
     console.log(data.data);
     console.log('');
   }
+
+  if (data.type === 'debug') {
+    console.log('-------------debug------------', new Date().toLocaleString());
+    console.log(data.txt);
+    console.log('');
+  }
 });
 
 ps.on('close', code => {
@@ -42,3 +48,4 @@ ps.on('close', code => {
 const temp = JSON.parse('[{"id":"plug_158d00019c9f2b","value":1,"desc":"plug","command":"on"}]');
 
 // setTimeout(() => ps.send({type: 'act', data: temp }), 1500);
+ps.send({type: 'debug', mode: true });
