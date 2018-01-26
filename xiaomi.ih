@@ -1,6 +1,8 @@
 {
     "id":"xiaomi",
     "description":"Xiaomi plugin",
-    "url":"",
-	  "version":"0.0.6"
+    "activation": false,
+    "resources": true,
+    "url": "http://188.225.9.68:49770",
+    "version":"0.0.6"
 }
