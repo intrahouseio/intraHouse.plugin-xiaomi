@@ -1,7 +1,8 @@
 {
   "id": "xiaomi",
   "description": "Xiaomi",
-  "gendevices": 1,
+  "gendevices": 0,
+  "single":1,
   "module": "index.js",
   "params": [
     {
@@ -86,7 +87,7 @@
       ]
     },
     "plug": {
-      "type": "550",
+      "type": "550", "cl": "ActorD",
       "ext": [
         {
           "name": "voltage",
