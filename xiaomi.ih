@@ -4,6 +4,5 @@
     "activation": false,
     "resources": false,
     "cross": true,
-    "url": "http://188.225.9.68:49770",
     "version":"0.0.8"
 }
