@@ -109,6 +109,10 @@
         }
       ]
     },
+    "button": {
+      "type": "800", "cl": "ActorD",
+      "ext": []
+    },
     "magnet": {
       "type": "111",
       "ext": [
