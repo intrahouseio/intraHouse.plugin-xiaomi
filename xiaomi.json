@@ -120,6 +120,28 @@
         }
       ]
     },
+	"ctrl2_0": {
+      "type": "550", "cl": "ActorD",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
+    },
+	"ctrl2_1": {
+      "type": "550", "cl": "ActorD",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
+    },
     "button": {
       "type": "800", "cl": "ActorD",
       "ext": []

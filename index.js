@@ -72,7 +72,16 @@ function start(options) {
 
   plugin.on('actions', data => {
     data.forEach(item => {
-      const [alias, id] = item.id.split('_');
+	     const temp = item.id.split('_');
+
+  	  if (temp.length > 2) {
+  	   var id = temp[temp.length - 1];
+  	   var alias = temp.slice(0, temp.length - 1).join('_');
+  	  } else {
+  	   var id = temp[1];
+  	   var alias = temp[0];
+  	  }
+
       const value = item.value;
       const command = item.command;
 
