@@ -104,6 +104,10 @@ function start(options) {
       case 'scan':
         xiaomi.sendAction(getGatewayCommand(xiaomi.getGatewayId(), 'add_device'));
         break;
+      case 'remove':
+        const { id, alias } = parseId(data.id);
+        xiaomi.sendAction(getGatewayCommand(xiaomi.getGatewayId(), 'remove_device', { id }));
+        break;
       default:
     }
   });
