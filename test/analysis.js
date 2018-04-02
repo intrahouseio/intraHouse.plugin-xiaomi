@@ -3,6 +3,7 @@ const readline = require('readline');
 
 const path = 'test/gateway.log';
 const temp = {};
+const models = {};
 
 const rd = readline.createInterface({
     input: fs.createReadStream(path),
@@ -18,6 +19,7 @@ function message(data) {
 
   if (!temp[msg.sid]) {
     temp[msg.sid] = {};
+    models[msg.sid] = msg.model;
   }
 
   const t = JSON.parse(msg.data);
@@ -43,6 +45,7 @@ function close() {
           temp[i][item] = Object.keys(temp[i][item]).slice(0, 12);
         });
     });
-
+  console.log(models)
+  console.log('----------------------------')
   console.log(temp);
 }
