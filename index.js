@@ -1,6 +1,7 @@
-const Plugin = require('./lib/plugin.js');
+const Plugin = require('./lib/plugin');
 const Xiaomi = require('./lib/xiaomi');
-const { getDeviceValue, getDeviceAction, getGatewayCommand } = require('./lib/utils');
+const { commandScan, commandRemove, parseId } = require('./command');
+const { getDeviceValue, getDeviceAction } = require('./lib/utils');
 
 const plugin = new Plugin();
 
@@ -19,17 +20,6 @@ plugin.on('channels', channels => {
 plugin.on('debug', mode => {
   debug = mode;
 });
-
-function parseId(string) {
-  const temp = string.split('_');
-
-  if (temp.length > 2) {
-   const id = temp[temp.length - 1];
-   const alias = temp.slice(0, temp.length - 1).join('_');
-   return { id, alias };
-  }
- return { id: temp[1], alias: temp[0] };
-}
 
 function getChanel(sid, desc) {
   return { id: `${desc}_${sid}`, desc };
@@ -56,47 +46,10 @@ function getChanelData(sid, props, data) {
     });
 }
 
-function compareDeviceList(old, now) {
-  if (old.length === now.length) {
-    let temp = false;
-    old.forEach(id => {
-      temp = !now.includes(id);
-    });
-    return temp;
-  }
-  return true;
-}
-
-function commandRemove(data) {
-  const xiaomi = this.xiaomi;
-  const { id, alias } = parseId(data.id);
-
-  function check(list) {
-    clear();
-    const old = xiaomi.getDeviceListOrigin();
-    const test = compareDeviceList(old, list);
-    if (test) {
-      xiaomi.setDeviceListOrigin(list)
-      plugin.removeChannel(data.id);
-      plugin.response('command', data);
-    } else {
-      plugin.response('command', data);
-      console.log('no!');
-    }
-  }
-
-  function clear() {
-    xiaomi.removeListener('devicelist', check);
-  }
-
-  xiaomi.on('devicelist', check);
-  xiaomi.sendAction(getGatewayCommand(xiaomi.getGatewayId(), 'remove_device', { id }));
-  xiaomi.getDeviceList();
-}
-
 function start(options) {
   const xiaomi = new Xiaomi(options);
-  const _commandRemove = commandRemove.bind({ xiaomi });
+  const _commandScan = commandScan.bind({ xiaomi, plugin });
+  const _commandRemove = commandRemove.bind({ xiaomi, plugin });
 
   xiaomi.on('message', data => {
     if (debug) {
@@ -141,7 +94,7 @@ function start(options) {
   plugin.on('command', data => {
     switch (data.command) {
       case 'scan':
-        xiaomi.sendAction(getGatewayCommand(xiaomi.getGatewayId(), 'add_device'));
+        _commandScan(data);
         break;
       case 'remove':
         _commandRemove(data);
