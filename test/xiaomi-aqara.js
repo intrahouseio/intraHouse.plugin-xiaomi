@@ -1,5 +1,5 @@
 const dgram = require('dgram');
-const socket = dgram.createSocket('udp4');
+const socket = dgram.createSocket({ type:"udp4", reuseAddr:true });
 const readline = require('readline');
 const crypto = require('crypto');
 const fs = require('fs');
@@ -9,7 +9,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const HOST = '192.168.0.127';
+const HOST = '192.168.0.101';
 const PORT = 9898;
 
 socket.on('error', error);
@@ -35,25 +35,25 @@ const commandList = {
     value: { a: 'off', b: 'on' }
   },
   gw_rgb: {
-    id: '7811dcb23d9d',
+    id: '7811dcb064a1',
     model: 'gateway',
     prop: 'rgb',
     value: { a: 0, b: getColor(255, 0, 0, 100)}  // alfa procent
   },
   gw_mid: {
-    id: '7811dcb23d9d',
+    id: '7811dcb064a1',
     model: 'gateway',
     prop: 'mid',
     value: { a: 9, b: 9 }, // 0 - 8, 10 - 13, 20 - 29, custom 10001 | vol 3 > 1, 0 - standart, 10 - 100
   },
   gw_add: {
-    id: '7811dcb23d9d',
+    id: '7811dcb064a1',
     model: 'gateway',
     prop: 'join_permission',
     value: { a: 'no', b: 'yes' },
   },
   gw_del: {
-    id: '7811dcb23d9d',
+    id: '7811dcb064a1',
     model: 'gateway',
     prop: 'remove_device',
     value: { a: '158d00019c9f2b', b: '158d00019c9f2b' },
@@ -92,7 +92,7 @@ function alarm() {
 function worker() {
   // sendCommand(null, 'b', 'gw_rgb');
   //  alarm();
-   sendCommand(null, 'b', 'gw_add');
+  // sendCommand(null, 'b', 'gw_add');
   // sendCommand(null, 'b', 'gw_mid');
   // sendCommand(null, 'b', 'gw_del');
 
@@ -148,7 +148,7 @@ function listenKeyboard() {
 
 function error(err) {
   console.log(`server error:\n${err.stack}`);
-  server.close();
+  // server.close();
 }
 
 function listen() {

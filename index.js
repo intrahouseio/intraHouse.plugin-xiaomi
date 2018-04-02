@@ -1,6 +1,6 @@
 const Plugin = require('./lib/plugin.js');
 const Xiaomi = require('./lib/xiaomi');
-const { getDeviceValue, getDeviceAction } = require('./lib/utils');
+const { getDeviceValue, getDeviceAction, getGatewayCommand } = require('./lib/utils');
 
 const plugin = new Plugin();
 
@@ -19,6 +19,17 @@ plugin.on('channels', channels => {
 plugin.on('debug', mode => {
   debug = mode;
 });
+
+function parseId(string) {
+  const temp = string.split('_');
+
+  if (temp.length > 2) {
+   const id = temp[temp.length - 1];
+   const alias = temp.slice(0, temp.length - 1).join('_');
+   return { id, alias };
+  }
+ return { id: temp[1], alias: temp[0] };
+}
 
 function getChanel(sid, desc) {
   return { id: `${desc}_${sid}`, desc };
@@ -72,16 +83,7 @@ function start(options) {
 
   plugin.on('actions', data => {
     data.forEach(item => {
-	     const temp = item.id.split('_');
-
-  	  if (temp.length > 2) {
-  	   var id = temp[temp.length - 1];
-  	   var alias = temp.slice(0, temp.length - 1).join('_');
-  	  } else {
-  	   var id = temp[1];
-  	   var alias = temp[0];
-  	  }
-
+      const { id, alias } = parseId(item.id);
       const value = item.value;
       const command = item.command;
 
@@ -95,5 +97,14 @@ function start(options) {
         default:
       }
     });
+  });
+
+  plugin.on('command', data => {
+    switch (data.command) {
+      case 'scan':
+        xiaomi.sendAction(getGatewayCommand(xiaomi.getGatewayId(), 'add_device'));
+        break;
+      default:
+    }
   });
 }

@@ -328,7 +328,7 @@
       ]
     }
   },
-  "actions": [
-    {}
-  ]
+  "commands": [
+    {"id":"scan","name":"Поиск нового устройства","reload":true,"noclose":false},
+    {"id":"remove","name":"Удаление устройства","reload":true,"noclose":false,"selected":true}]
 }
