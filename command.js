@@ -79,12 +79,13 @@ function commandScan(data) {
   }
 
   function timeout() {
+    clear();
     plugin.response('command', data, false);
   }
 
   function clear() {
-    if (timeout) {
-      clearTimeout(timeout);
+    if (timer) {
+      clearTimeout(timer);
     }
     xiaomi.removeListener('devicelist', check);
     xiaomi.removeListener('newdevice', newdevice);
@@ -100,6 +101,7 @@ function commandRemove(data) {
   const plugin = this.plugin;
   const xiaomi = this.xiaomi;
   const { id, alias } = parseId(data.id);
+  const timer = setTimeout(timeout, 10000);
 
   function check(list) {
     clear();
@@ -115,7 +117,15 @@ function commandRemove(data) {
     }
   }
 
+  function timeout() {
+    clear();
+    plugin.response('command', data, false);
+  }
+
   function clear() {
+    if (timer) {
+      clearTimeout(timeout);
+    }
     xiaomi.removeListener('devicelist', check);
   }
 
