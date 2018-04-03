@@ -1,7 +1,7 @@
 const fs = require('fs');
 const readline = require('readline');
 
-const path = 'test/gateway.log';
+const path = './gateway.log';
 const temp = {};
 const models = {};
 

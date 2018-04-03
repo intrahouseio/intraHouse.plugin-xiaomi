@@ -9,7 +9,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const HOST = '192.168.0.101';
+const HOST = '192.168.0.122';
 const PORT = 9898;
 
 socket.on('error', error);
