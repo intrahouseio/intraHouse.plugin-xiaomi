@@ -46,7 +46,6 @@ function commandScan(data) {
   let temp = [];
 
   function complete(device, sid) {
-    xiaomi.removeListener('device', complete);
     if (device.sid === sid) {
       plugin.response('command', data);
     } else {
@@ -60,7 +59,7 @@ function commandScan(data) {
     const test = compareDeviceList(old, list);
     const newdevice = getNewDevice(list, temp);
     if (test && newdevice) {
-      xiaomi.on('device', device => complete(device, newdevice.sid));
+      xiaomi.once('device', device => complete(device, newdevice.sid));
       xiaomi.setDeviceListOrigin(list);
       xiaomi.addToDeviceList(newdevice)
     } else {
@@ -124,7 +123,7 @@ function commandRemove(data) {
 
   function clear() {
     if (timer) {
-      clearTimeout(timeout);
+      clearTimeout(timer);
     }
     xiaomi.removeListener('devicelist', check);
   }
