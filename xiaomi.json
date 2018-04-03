@@ -1,7 +1,7 @@
 {
   "id": "xiaomi",
   "description": "Xiaomi",
-  "gendevices": 0,
+  "gendevices": 1,
   "single":0,
   "module": "index.js",
   "params": [

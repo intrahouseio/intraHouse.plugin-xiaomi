@@ -23,34 +23,78 @@ function compareDeviceList(old, now) {
   return true;
 }
 
+function getNewDevice(dlist, slist) {
+  let temp = null;
+  if (slist.length === 0) {
+    return false;
+  }
+  slist.forEach(i => {
+    if (dlist.includes(i.sid)) {
+      temp = i;
+    }
+  })
+  return temp;
+}
+
 
 function commandScan(data) {
   const plugin = this.plugin;
   const xiaomi = this.xiaomi;
   const { id, alias } = parseId(data.id);
+  const timer = setTimeout(timeout, 30000);
+
+  let temp = [];
+
+  function complete(device, sid) {
+    // xiaomi.removeListener('device', complete);
+    if (device.sid === sid) {
+      plugin.response('command', data);
+    } else {
+      plugin.response('command', data, false);
+    }
+  }
 
   function check(list) {
     clear();
     const old = xiaomi.getDeviceListOrigin();
     const test = compareDeviceList(old, list);
-    if (test) {
-      xiaomi.setDeviceListOrigin(list)
-      plugin.removeChannel(data.id);
-      plugin.response('command', data);
+    const newdevice = getNewDevice(list, temp);
+    if (test && newdevice) {
+      xiaomi.on('device', device => complete(device, newdevice.sid));
+      xiaomi.setDeviceListOrigin(list);
+      xiaomi.addToDeviceList(newdevice)
     } else {
-      plugin.response('command', data);
-      console.log('no!');
+      plugin.response('command', data, false);
     }
   }
 
-  function clear() {
-    xiaomi.removeListener('devicelist', check);
+  function newdevice(data) {
+    temp.push(data);
+    if (temp.length === 1) {
+      setTimeout(() => {
+        xiaomi.on('devicelist', check);
+        xiaomi.getDeviceList();
+      }, 1000);
+    }
   }
 
-  xiaomi.on('devicelist', check);
+  function timeout() {
+    plugin.response('command', data, false);
+  }
+
+  function clear() {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+    xiaomi.removeListener('devicelist', check);
+    xiaomi.removeListener('newdevice', newdevice);
+  }
+
+
+  xiaomi.on('newdevice', newdevice);
   xiaomi.sendAction(getGatewayCommand(xiaomi.getGatewayId(), 'add_device'));
-  xiaomi.getDeviceList();
 }
+
 
 function commandRemove(data) {
   const plugin = this.plugin;
@@ -62,12 +106,12 @@ function commandRemove(data) {
     const old = xiaomi.getDeviceListOrigin();
     const test = compareDeviceList(old, list);
     if (test) {
-      xiaomi.setDeviceListOrigin(list)
+      xiaomi.setDeviceListOrigin(list);
+      xiaomi.removeToDeviceList(id);
       plugin.removeChannel(data.id);
       plugin.response('command', data);
     } else {
       plugin.response('command', data);
-      console.log('no!');
     }
   }
 
