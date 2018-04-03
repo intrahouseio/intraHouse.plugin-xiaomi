@@ -46,7 +46,7 @@ function commandScan(data) {
   let temp = [];
 
   function complete(device, sid) {
-    // xiaomi.removeListener('device', complete);
+    xiaomi.removeListener('device', complete);
     if (device.sid === sid) {
       plugin.response('command', data);
     } else {
