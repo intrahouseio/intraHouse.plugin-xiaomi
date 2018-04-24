@@ -1,7 +1,12 @@
 const child = require('child_process');
+const readline = require('readline');
 const modulepath = './index.js';
 
 const unitid = 'plugin_emu'
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
 const params = {
   host: '192.168.0.101',
@@ -37,6 +42,12 @@ ps.on('message', data => {
   if (data.type === 'debug1') {
     console.log('-------------debug------------', new Date().toLocaleString());
     console.log(data.txt);
+    console.log('');
+  }
+
+  if (data.type === 'command') {
+    console.log('-------------command------------', new Date().toLocaleString());
+    console.log(data);
     console.log('');
   }
 });
@@ -109,19 +120,49 @@ const temp7 = {
    value: '',
 }
 
-
-function clear() {
-  setTimeout(() => ps.send(temp1), 500);
-  setTimeout(() => ps.send(temp2), 750);
-  setTimeout(() => ps.send(temp3), 1000);
-  setTimeout(() => ps.send(temp5), 1250);
-  setTimeout(() => ps.send(temp6), 1500);
-  setTimeout(() => ps.send(temp7), 1500);
+const temp8 = {
+  uuid: 'ae9dfadd-69ee-41da-a164-a3936dcc572d',
+   type: 'command',
+   unit: 'xiaomi1',
+   command: 'remove',
+   id: 'cube_action_158d00010ed4a3',
+   value: '',
 }
 
 
-// setTimeout(() => ps.send({type: 'act', data: temp }), 1500);
-clear();
-setTimeout(() => ps.send(temp4), 4500);
+function clear() {
+  // setTimeout(() => ps.send(temp1), 0);
+  // setTimeout(() => ps.send(temp2), 50);
+  // setTimeout(() => ps.send(temp3), 100);
+  // setTimeout(() => ps.send(temp5), 150);
+  // setTimeout(() => ps.send(temp6), 200);
+  // setTimeout(() => ps.send(temp7), 250);
+  setTimeout(() => ps.send(temp8), 300);
+}
+
+function command(value) {
+  switch (value) {
+    case 'exit':
+      process.exit();
+      break;
+    case '+':
+      setTimeout(() => ps.send(temp4), 0);
+      break;
+    case '-':
+      clear();
+      break;
+    default:
+      break;
+  }
+  listenKeyboard();
+  console.log(value);
+}
+
+function listenKeyboard() {
+  rl.question('', command);
+}
+
+
+listenKeyboard();
 
 ps.send({type: 'debug', mode: true });
