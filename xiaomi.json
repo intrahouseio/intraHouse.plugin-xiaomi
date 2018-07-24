@@ -24,6 +24,12 @@
       "val": ""
     },
     {
+      "name": "volume_control",
+      "note": "Volume control",
+      "type": "cb",
+      "val": false
+    },
+    {
       "name": "alarm_volume",
       "note": "Alarm volume",
       "type": "SLIDER",
