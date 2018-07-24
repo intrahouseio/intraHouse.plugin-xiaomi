@@ -8,7 +8,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const HOST = '192.168.0.127';
+const HOST = '10.42.0.190';
 const PORT =  54321;
 
 
@@ -20,7 +20,7 @@ let header = new Buffer('21310000fffffffffffffffffffffffffffffffffffffffffffffff
 let count = 0;
 let status = 'handshake';
 
-const t = new Buffer('44cbc0b8974e5fd75a758539b72aefa1', 'hex');
+const t = new Buffer('db96c43b3949b1951b0225b49aca1e89', 'hex');
 const _token = Buffer.from(t);
 const _key = crypto.createHash('md5').update(t).digest();
 const _iv = crypto.createHash('md5').update(_key).update(t).digest();
@@ -73,7 +73,17 @@ function message(data) {
   }
 }
 
+function listenKeyboard() {
+  rl.question('', command);
+}
+
+function command(value) {
+  console.log(dec(new Buffer(value, 'hex')));
+  listenKeyboard();
+}
+
 function start() {
+   listenKeyboard();
    socket.setBroadcast(true);
    socket.setMulticastTTL(128);
    socket.addMembership('224.0.0.50');
@@ -89,3 +99,15 @@ function handshakeEnd() {
    // send({ method: 'toggle_plug', params: ['neutral_0', 'on'], sid: '158d00019c9f2b' });
    // send({ method: 'toggle_ctrl_neutral', params: ['neutral_0', 'off'], sid: '158d0001f99dfb' });
 }
+
+
+//-----------------command-------------------
+/*
+res { id: 65035, method: 'set_alarming_volume', params: [ 70 ] }
+res { id: 65068, method: 'set_doorbell_volume', params: [ 60 ] }
+res { id: 65070, method: 'set_fm_volume', params: [ 20 ] }
+res { id: 65074, method: 'set_gateway_volume', params: [ 40 ] }
+
+
+
+*/
