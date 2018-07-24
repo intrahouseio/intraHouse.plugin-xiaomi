@@ -7,32 +7,33 @@
   "params": [
     {
       "name": "host",
-      "note": "Gateway IP",
+      "note": "$Host",
       "type": "string",
       "val": "192.168.0.111"
     },
     {
       "name": "port",
-      "note": "Listen Port",
+      "note": "$Port",
       "type": "number",
       "val": "9898"
     },
     {
       "name": "token",
-      "note": "Token",
+      "note": "$Token",
       "type": "string",
       "val": ""
     },
     {
       "name": "volume_control",
-      "note": "Volume control",
+      "note": "$VolumeControl",
       "type": "cb",
       "val": false
     },
     {
       "name": "alarm_volume",
-      "note": "Alarm volume",
-      "type": "SLIDER",
+      "note": "$AlarmVolume",
+      "type": "number",
+      "visible": "data.volume_control === true",
       "data": {
         "min": 0,
         "max": 100
@@ -41,8 +42,9 @@
     },
     {
       "name": "doorbell_volume",
-      "note": "Doorbell volume",
-      "type": "SLIDER",
+      "note": "$DoorbellVolume",
+      "type": "number",
+      "visible": "data.volume_control === true",
       "data": {
         "min": 0,
         "max": 100
@@ -51,8 +53,9 @@
     },
     {
       "name": "radio_volume",
-      "note": "Radio volume",
-      "type": "SLIDER",
+      "note": "$RadioVolume",
+      "type": "number",
+      "visible": "data.volume_control === true",
       "data": {
         "min": 0,
         "max": 100
@@ -61,8 +64,9 @@
     },
     {
       "name": "gateway_volume",
-      "note": "Gateway volume",
-      "type": "SLIDER",
+      "note": "$GatewayVolume",
+      "type": "number",
+      "visible": "data.volume_control === true",
       "data": {
         "min": 0,
         "max": 100

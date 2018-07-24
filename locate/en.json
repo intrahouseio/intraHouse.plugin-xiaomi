@@ -1,0 +1,10 @@
+{
+  "Host": "Host (Xiaomi Gateway)",
+  "Port": "Listen Port",
+  "Token": "Token",
+  "VolumeControl": "Set volume at plugin's start",
+  "AlarmVolume": "Alarm volume",
+  "DoorbellVolume": "Doorbell volume",
+  "RadioVolume": "Radio volume",
+  "GatewayVolume": "Gateway volume"
+}
