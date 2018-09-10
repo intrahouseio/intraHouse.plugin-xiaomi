@@ -9,9 +9,9 @@ const rl = readline.createInterface({
 });
 
 const params = {
-  host: '10.42.0.190',
+  host: '192.168.0.129',
   port: 9898,
-  token: 'db96c43b3949b1951b0225b49aca1e89',
+  token: 'a9cff58c01749d3039b4444134605f45',
   volume_control: true,
   alarm_volume: 0,
   doorbell_volume: 0,

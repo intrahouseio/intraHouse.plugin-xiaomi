@@ -8,7 +8,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const HOST = '10.42.0.190';
+const HOST = '192.168.0.129';
 const PORT =  54321;
 
 
@@ -20,7 +20,7 @@ let header = new Buffer('21310000fffffffffffffffffffffffffffffffffffffffffffffff
 let count = 0;
 let status = 'handshake';
 
-const t = new Buffer('db96c43b3949b1951b0225b49aca1e89', 'hex');
+const t = new Buffer('a9cff58c01749d3039b4444134605f45', 'hex');
 const _token = Buffer.from(t);
 const _key = crypto.createHash('md5').update(t).digest();
 const _iv = crypto.createHash('md5').update(_key).update(t).digest();
@@ -96,7 +96,8 @@ function handshakeEnd() {
    send({ method: 'get_device_prop', params: ['lumi.0','device_list'] });
    send({ method: 'get_lumi_dpf_aes_key', params: [] });
 
-   // send({ method: 'toggle_plug', params: ['neutral_0', 'on'], sid: '158d00019c9f2b' });
+
+   send({ method: 'toggle_plug', params: ['neutral_0', 'on'], sid: '158d00019c9f2b' });
    // send({ method: 'toggle_ctrl_neutral', params: ['neutral_0', 'off'], sid: '158d0001f99dfb' });
 }
 

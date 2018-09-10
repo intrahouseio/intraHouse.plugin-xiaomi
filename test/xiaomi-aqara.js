@@ -9,7 +9,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const HOST = '192.168.0.122';
+const HOST = '192.168.0.129';
 const PORT = 9898;
 
 socket.on('error', error);
@@ -19,7 +19,7 @@ socket.bind(PORT, start);
 
 
 let DEVICES_LIST = {};
-let TOKEN = '';
+let TOKEN = 'a9cff58c01749d3039b4444134605f45';
 
 const commandList = {
   plug: {
@@ -247,6 +247,8 @@ function start() {
    socket.setMulticastTTL(128);
    socket.addMembership('224.0.0.50');
    send('{"cmd" : "get_id_list"}');
+   send('{ "cmd": "read", "sid": "158d0002270af1" }');
+   send('{ "cmd": "read", "sid": "158d0001f99dfb" }');
    listenKeyboard();
    // checkStatusDevices();
 }

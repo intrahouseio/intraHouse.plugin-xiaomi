@@ -203,6 +203,39 @@
         }
       ]
     },
+    "button_0": {
+      "type": "200",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
+    },
+    "button_1": {
+      "type": "200",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
+    },
+    "button_dual": {
+      "type": "200",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
+    },
     "magnet": {
       "type": "111",
       "ext": [
