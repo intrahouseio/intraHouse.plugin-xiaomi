@@ -39,7 +39,7 @@ function getChanelData(sid, props, data) {
   return Object.keys(props)
     .filter(key => props[key].type !== 'ext')
     .map(key => {
-      if (data[key]) {
+      if (data.hasOwnProperty(key)) {
         return { id: `${props[key].alias}_${sid}`, value: getDeviceValue(data[key]), ext  }
       }
       return { id: `${props[key].alias}_${sid}`, ext  }
