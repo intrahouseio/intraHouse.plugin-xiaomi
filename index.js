@@ -47,7 +47,7 @@ function getChanelData(sid, props, data) {
 }
 
 function start(options) {
-  plugin.debug("version: 0.0.24");
+  plugin.debug("version: 0.0.25");
   const xiaomi = new Xiaomi(options);
   const _commandScan = commandScan.bind({ xiaomi, plugin });
   const _commandRemove = commandRemove.bind({ xiaomi, plugin });
