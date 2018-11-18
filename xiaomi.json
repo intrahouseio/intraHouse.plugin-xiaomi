@@ -303,6 +303,23 @@
         }
       ]
     },
+    "gas": {
+      "type": "140",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        },
+        {
+          "name": "density",
+          "note": "Плотность дыма",
+          "type": "number",
+          "op": "r"
+        }
+      ]
+    },
     "gw_rgb": {
       "type": "530",
       "ext": [
