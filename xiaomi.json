@@ -331,6 +331,17 @@
         }
       ]
     },
+    "gw_mid": {
+      "type": "501",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
+    },
     "gw_illumination": {
       "type": "200",
       "ext": [
