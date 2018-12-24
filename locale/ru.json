@@ -6,5 +6,10 @@
   "AlarmVolume": "Громкость тревоги",
   "DoorbellVolume": "Громкость дверного звонка",
   "RadioVolume": "Громкость радио",
-  "GatewayVolume": "Громкость шлюза"
+  "GatewayVolume": "Громкость шлюза",
+  "ChannelPowerConsumed": "Дополнительный канал Power Consumed",
+  "ChannelLoadPower": "Дополнительный канал Load Power",
+  "ChannelInuse": "Дополнительный канал Inuse",
+  "ChannelVoltage": "Дополнительный канал Voltage",
+  "ChannelActive": "Дополнительный канал Last Data"
 }

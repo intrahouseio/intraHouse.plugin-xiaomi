@@ -17,6 +17,7 @@ const params = {
   doorbell_volume: 0,
   radio_volume: 0,
   gateway_volume: 0,
+  channel_active: 1,
 }
 
 const config = [];

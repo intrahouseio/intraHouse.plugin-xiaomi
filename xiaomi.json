@@ -24,6 +24,42 @@
       "val": ""
     },
     {
+      "name": "motion_reset",
+      "note": "$MotionReset",
+      "type": "number",
+      "val": 15
+    },
+    {
+      "name": "channel_power_consumed",
+      "note": "$ChannelPowerConsumed",
+      "type": "cb",
+      "val": false
+    },
+    {
+      "name": "channel_load_power",
+      "note": "$ChannelLoadPower",
+      "type": "cb",
+      "val": false
+    },
+    {
+      "name": "channel_inuse",
+      "note": "$ChannelInuse",
+      "type": "cb",
+      "val": false
+    },
+    {
+      "name": "channel_voltage",
+      "note": "$ChannelVoltage",
+      "type": "cb",
+      "val": false
+    },
+    {
+      "name": "channel_active",
+      "note": "$ChannelActive",
+      "type": "cb",
+      "val": false
+    },
+    {
       "name": "volume_control",
       "note": "$VolumeControl",
       "type": "cb",
