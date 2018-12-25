@@ -97,9 +97,29 @@ function handshakeEnd() {
    send({ method: 'get_lumi_dpf_aes_key', params: [] });
 
 
-   send({ method: 'toggle_plug', params: ['neutral_0', 'on'], sid: '158d00019c9f2b' });
+   // send({ method: 'toggle_plug', params: ['neutral_0', 'on'], sid: '158d00019c9f2b' });
    // send({ method: 'toggle_ctrl_neutral', params: ['neutral_0', 'off'], sid: '158d0001f99dfb' });
+
+   send({
+     method: 'play_fm',
+     params: [ 'off' ],
+   });
+
+   setTimeout(() => {
+     send({
+       method: 'add_channels',
+       params: { chs: [ { id: 9999671, url: 'http://192.168.0.110:4040/stream.m3u8', type: 0 } ] },
+     });
+
+     send({
+       method: 'play_specify_fm',
+       params: { id: 9999671, type: 0 },
+     });
+   }, 1000)
+
 }
+
+
 
 
 //-----------------command-------------------
