@@ -11,5 +11,6 @@
   "ChannelLoadPower": "Дополнительный канал Load Power",
   "ChannelInuse": "Дополнительный канал Inuse",
   "ChannelVoltage": "Дополнительный канал Voltage",
-  "ChannelActive": "Дополнительный канал Last Data"
+  "ChannelActive": "Дополнительный канал Last Data",
+  "MotionReset": "Автоматический сброс движения (сек)"
 }

@@ -11,5 +11,6 @@
   "ChannelLoadPower": "Additional channel Load Power",
   "ChannelInuse": "Additional channel Inuse",
   "ChannelVoltage": "Additional channel Voltage",
-  "ChannelActive": "Additional channel Last Data"
+  "ChannelActive": "Additional channel Last Data",
+  "MotionReset": "Auto Reset Motion (sec)"
 }
