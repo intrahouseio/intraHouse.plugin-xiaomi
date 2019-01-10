@@ -34,7 +34,7 @@ function getChanelList(device) {
 function getChanelData(sid, props, data, error) {
   const ext =  Object.keys(data)
     .filter(key => props[key] && props[key].type === 'ext')
-    .reduce((l, n) => Object.assign({}, l, { [props[n].alias]: getDeviceValue(data[n]) }), {})
+    .reduce((l, n) => Object.assign({}, l, { [props[n].alias]: getDeviceValue(data[n], props[n].alias) }), {})
 
   return Object.keys(props)
     .filter(key => props[key].type !== 'ext')
@@ -43,14 +43,14 @@ function getChanelData(sid, props, data, error) {
         if (error) {
           return { id: `${props[key].alias}_${sid}`, err: 'Device timeout!' }
         }
-        return { id: `${props[key].alias}_${sid}`, value: getDeviceValue(data[key]), ext  }
+        return { id: `${props[key].alias}_${sid}`, value: getDeviceValue(data[key], props[key].alias), ext  }
       }
       return { id: `${props[key].alias}_${sid}`, ext  }
     });
 }
 
 function start(options) {
-  plugin.debug("version: 0.0.36");
+  plugin.debug("version: 0.0.38");
   const xiaomi = new Xiaomi(options);
   const _commandScan = commandScan.bind({ xiaomi, plugin });
   const _commandRemove = commandRemove.bind({ xiaomi, plugin });
