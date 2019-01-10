@@ -50,7 +50,7 @@ function getChanelData(sid, props, data, error) {
 }
 
 function start(options) {
-  plugin.debug("version: 0.0.32");
+  plugin.debug("version: 0.0.34");
   const xiaomi = new Xiaomi(options);
   const _commandScan = commandScan.bind({ xiaomi, plugin });
   const _commandRemove = commandRemove.bind({ xiaomi, plugin });
@@ -89,13 +89,13 @@ function start(options) {
 
       switch (command) {
         case 'on':
-          xiaomi.sendAction(getDeviceAction(id, alias, ['on']));
+          xiaomi.sendAction(getDeviceAction(id, alias, ['on', value]));
           break;
         case 'off':
-          xiaomi.sendAction(getDeviceAction(id, alias, ['off']));
+          xiaomi.sendAction(getDeviceAction(id, alias, ['off', value]));
           break;
         case 'set':
-          xiaomi.sendAction(getDeviceAction(id, alias, value));
+          xiaomi.sendAction(getDeviceAction(id, alias, ['set', value]));
           break;
         default:
       }
