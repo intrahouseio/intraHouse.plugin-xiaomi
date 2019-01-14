@@ -357,37 +357,16 @@
       ]
     },
     "gw_rgb": {
-      "type": "530",
-      "ext": [
-        {
-          "name": "voltage",
-          "note": "Зарядка",
-          "type": "number",
-          "op": "r"
-        }
-      ]
+      "type": "534",
+      "ext": []
     },
     "gw_mid": {
       "type": "501",
-      "ext": [
-        {
-          "name": "voltage",
-          "note": "Зарядка",
-          "type": "number",
-          "op": "r"
-        }
-      ]
+      "ext": []
     },
     "gw_illumination": {
       "type": "200",
-      "ext": [
-        {
-          "name": "voltage",
-          "note": "Зарядка",
-          "type": "number",
-          "op": "r"
-        }
-      ]
+      "ext": []
     },
     "gateway": {
       "type": "9100",
