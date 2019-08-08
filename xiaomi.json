@@ -492,6 +492,26 @@
           "op": "r"
         }
       ]
+    },
+    "power_consumed": {
+      "cl": "SensorA",
+      "ext": []
+    },
+    "load_power": {
+      "cl": "SensorA",
+      "ext": []
+    },
+    "inuse": {
+      "cl": "SensorA",
+      "ext": []
+    },
+    "voltage": {
+      "cl": "SensorA",
+      "ext": []
+    },
+    "active"": {
+      "cl": "SensorA",
+      "ext": []
     }
   },
   "commands": [
