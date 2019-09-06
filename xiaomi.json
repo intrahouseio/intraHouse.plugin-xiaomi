@@ -172,6 +172,17 @@
         }
       ]
     },
+    "curtain": {
+      "cl": "ActorA",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
+    },
     "plug": {
       "type": "550", "cl": "ActorD",
       "ext": [
