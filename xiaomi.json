@@ -239,6 +239,39 @@
         }
       ]
     },
+    "ctrl3_0": {
+      "type": "550", "cl": "ActorD",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
+    },
+	"ctrl3_1": {
+      "type": "550", "cl": "ActorD",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
+    },
+    "ctrl3_2": {
+      "type": "550", "cl": "ActorD",
+      "ext": [
+        {
+          "name": "voltage",
+          "note": "Зарядка",
+          "type": "number",
+          "op": "r"
+        }
+      ]
+    },
     "button": {
       "type": "200",
       "ext": [
